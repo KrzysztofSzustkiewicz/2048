@@ -113,14 +113,14 @@ while True:
         x=getch.getch()
         clr()
         if x=="a":
-            columns_addition_left(matrix, b, left)
+            columns_addition_left(matrix, matrix_size, 'left')
             for i in range(0, 4):
                 matrix[i] = list(filter(lambda x: x > 0, matrix[i]))
                 while len(matrix[i]) < 4:
                     matrix[i].append(0)
             puts_random(random_element)
         elif x=="w":
-            columns_addition_left(matrix, b, up)
+            columns_addition_left(matrix, matrix_size, 'up')
             list2 = []
             j = 0
             for k in range(0, 4):
@@ -136,7 +136,7 @@ while True:
                 list2 = []
             puts_random(random_element)
         elif x == "s":
-            columns_addition_left(matrix, b, down)
+            columns_addition_left(matrix, matrix_size, 'down')
             lista2 = []
             j = 3
             for k in range(0, 4):
@@ -152,7 +152,7 @@ while True:
                 lista2 = []
             puts_random(random_element)
         elif x == "d":
-            columns_addition_left(matrix, b, right)
+            columns_addition_left(matrix, matrix_size, 'right')
             for i in range(0, 4):
                 matrix[i] = list(filter(lambda x: x > 0, matrix[i]))
                 while len(matrix[i]) < 4:
