@@ -1,144 +1,159 @@
-import random,os,sys,getch
+import os
+import getch
+import random
 from termcolor import colored
 
-random_element = random.randrange(2,4,2)
 
-color_key = {0: 'cyan',
-             2: 'red',
-             4: 'green',
-             8: 'white',
+color_key = {0 : 'blue',
+             2 : 'red',
+             4 : 'green',
+             8 : 'cyan',
              16 : 'yellow',
-             32: 'grey',
+             32 : 'grey',
              64 : 'white',
              128 : 'cyan',
-             256:'green',
-             512:'yellow',
-             1024:'red',
-             2048:'white',
-             4096:'grey',
-             8192: 'cyan'
-             }
+             256 :'green',
+             512 :'yellow',
+             1024 :'red',
+             2048 :'white'}
 
-#Function dsd puts '2' or '4' in random place of created array
+row = 0
+column = 0
 
-def puts_random(element):
-    random_x = random.randrange(0, 4)
-    random_y = random.randrange(0, 4)
-    if matrix[random_x][random_y] == 0:
-        matrix[random_x][random_y] = element
+col_1 = ( column + 1 )
+col_2 = ( 2 - column )
+col_3 = ( 3 - column )
+row_1 = ( row + 1)
+row_2 = ( 2 - row )
+row_3 = ( 3 - row )
+
+left = {'first':column,
+        'second':col_1,
+        'third':row,
+        'fourth':row}
+
+right = {'first':col_3,
+         'second':col_2,
+         'third':row,
+         'fourth':row}
+
+up = {'first':column,
+      'second':column,
+      'third':row,
+      'fourth':row_1}
+
+down = {'first':column,
+        'second':column,
+        'third':row_3,
+        'fourth':row_2}
+
+b = 4
+macierz = [0] * b
+for i in range(b):
+    macierz[i] = [0] * b
+
+
+def columns_addition(matrix,size,course):
+    for row in range(0, size):
+        for column in range(0, size - 1):
+                if matrix[course['third']][course['first']] == matrix[course['fourth']][course['second']] and matrix[course['third']][course['first']] != 0:
+                    matrix[course['third']][course['first']] = 2 * matrix[course['third']][course['first']]
+                    matrix[course['fourth']][course['second']] = 0
+
+
+def movement(func):
+    for i in range(0, 4):
+        macierz[i] = list(filter(lambda x: x > 0, macierz[i]))
+        while len(macierz[i]) < 4:
+            func
+
+
+def movement_ver(a1,a2,a3):
+    lista2 = []
+    j = 0
+    for k in range(0, 4):
+        for i in range(0, 4):
+            lista2.append(macierz[a2][k])
+        lista2 = list(filter(lambda x: x > 0, lista2))
+        while len(lista2) < 4:
+            lista2.append(0)
+        for i in range(0, 4):
+            macierz[i][k] = lista2[j]
+            j += a3
+        j = a1
+        lista2 = []
+
+
+def print_array(x,y,z,i):
+    for j in range(x, y):
+        print("\n"*z ," " * (4 - len(str(macierz[i][j]))), colored(macierz[i][j], color_key[(macierz[i][j])]),end='')
+
+
+def print_array1():
+    for i in range(0, len(macierz)):
+            print_array(0,1,1,i)
+            print_array(1,2,0,i)
+            print_array(2,3,0,i)
+            print_array(3,4,0,i)
+
+
+def random_elements():
+    d = random.randrange(0, 4)
+    e = random.randrange(0, 4)
+    if macierz[d][e] == 0:
+        macierz[d][e] = 2
     else:
-        puts_random()
+        random_elements()
+
 
 def clr():
     os.system('clear')
 
-# Creates an array
 clr()
 
-matrix_size = 4
-matrix = [0] * matrix_size
-for i in range(matrix_size):
-    matrix[i] = [0] * matrix_size
 
+def f_1():
+    macierz[i].append(0)
 
-#Puts '2' in random place of the array twice at the beggining of the game
+def f_2():
+    macierz[i].insert(0,0)
+
 
 for i in range(2):
-    puts_random(2)
+    random_elements()
 
-#Print created array and hints
-def print_matrix():
-    i = 0
-    j = 0
-    mat_len = len(str(matrix[i][j]))
-    mat_ij = matrix[i][j]
 
-    for i in range(0, len(matrix)):
-        for j in range(0, 1):
-            print("\n", " " * (4 - mat_len), colored(mat_ij, color_key[mat_ij]), end='')
-        for j in range(1, 2):
-            print(" " * (4 - mat_len), colored(mat_ij, color_key[mat_ij]), end='')
-        for j in range(2, 3):
-            print(" " * (4 - mat_len), colored(mat_ij, color_key[mat_ij]), end='')
-        for j in range(3, 4):
-            print(" " * (4 - mat_len), colored(mat_ij, color_key[mat_ij]), end='')
-print_matrix()py
+print_array1()
 
 while True:
 
-#Takes input from user
-    try:
-        print("\n\n"," ", "Operate with W S A D")
-        x=getch.getch()
-        clr()
-        if x=="a":
-            for i in range(0, 4):
-                for k in range(0, 3):
-                    if matrix[i][k] == matrix[i][k + 1] and matrix[i][k] != 0:
-                        matrix[i][k] = 2 * matrix[i][k]
-                        matrix[i][k + 1] = 0
-            for i in range(0, 4):
-                matrix[i] = list(filter(lambda x: x > 0, matrix[i]))
-                while len(matrix[i]) < 4:
-                    matrix[i].append(0)
-            puts_random(random_element)
-        elif x=="w":
-            for k in range(0, 4):
-                for i in range(0, 3):
-                    if matrix[i][k] == matrix[i + 1][k] and matrix[i][k] != 0:
-                        matrix[i][k] = 2 * matrix[i][k]
-                        matrix[i + 1][k] = 0
-            list2 = []
-            j = 0
-            for k in range(0, 4):
-                for i in range(0, 4):
-                    list2.append(matrix[i][k])
-                list2 = list(filter(lambda x: x > 0, lista2))
-                while len(list2) < 4:
-                    list2.append(0)
-                for i in range(0, 4):
-                    matrix[i][k] = list2[j]
-                    j += 1
-                j = 0
-                list2 = []
-            puts_random(random_element)
-        elif x == "s":
-            for k in range(0, 4):
-                for i in range(0, 3):
-                    if matrix[3 - i][k] == matrix[2 - i][k] and matrix[3 - i][k] != 0:
-                        matrix[3 - i][k] = 2 * matrix[3 - i][k]
-                        matrix[2 - i][k] = 0
-            lista2 = []
-            j = 3
-            for k in range(0, 4):
-                for i in range(0, 4):
-                    lista2.append(matrix[3-i][k])
-                lista2 = list(filter(lambda x: x > 0, lista2))
-                while len(lista2) < 4:
-                    lista2.append(0)
-                for i in range(0, 4):
-                    matrix[i][k] = lista2[j]
-                    j -= 1
-                j = 3
-                lista2 = []
-            puts_random(random_element)
-        elif x == "d":
-            for i in range(0, 4):
-                for k in range(0,3):
-                    if matrix[i][3-k] == matrix[i][2-k] and matrix[i][3-k] != 0:
-                        matrix[i][3-k] = 2 * matrix[i][3-k]
-                        matrix[i][2-k] = 0
-            for i in range(0, 4):
-                matrix[i] = list(filter(lambda x: x > 0, matrix[i]))
-                while len(matrix[i]) < 4:
-                     matrix[i].insert(0,0)
-            puts_random(random_element)
+    print("\n\n", " ", "Operate with W S A D")
 
-    except:
-        print("\nGAME OVER\n")
-        break
+    x=getch.getch()
+
+    clr()
+
+    if x=="a":
+        columns_addition(macierz,b,left)
+        movement(f_1)
+        random_elements()
+
+    elif x == "d":
+        columns_addition(macierz, b,right)
+        movement(f_2)
+        random_elements()
+
+    elif x=="w":
+        columns_addition(macierz, b, up)
+        movement_ver(0, i, 1)
+        random_elements()
+
+    elif x == "s":
+        columns_addition(macierz, b, down)
+        movement_ver(3, 3-i, (-1) )
+        random_elements()
+
+    print_array1()
 
 
-#Prints modified array with specific color for each character
 
-print_matrix()
