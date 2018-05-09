@@ -55,7 +55,19 @@ def matrix_addition(matrix, direction):
                     matrix[int(fabs(row + c))][int(fabs(column + d))] = 0
 
 
+matrix = [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]]
 
+matrix_index_dictionaries_creation(4)
+
+print(matrix)
+
+matrix_addition(matrix, right)
+for i in range(0, 4):
+    matrix[i] = list(filter(lambda x: x > 0, matrix[i]))
+    while len(matrix[i]) < 4:
+        matrix[i].append(0)
+
+print(matrix)
 
 
 

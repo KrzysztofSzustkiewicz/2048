@@ -92,11 +92,11 @@ matrix_index_dictionaries_creation(b)
 while True:
 
 #Takes input from user
-
         print("\n\n"," ", "Operate with W S A D")
         x=input()
         clr()
         if x=="a":
+            print(left['index_a'])
             matrix_addition(macierz, left)
             for i in range(0, 4):
                 macierz[i] = list(filter(lambda x: x > 0, macierz[i]))
@@ -143,7 +143,7 @@ while True:
                      macierz[i].insert(0,0)
             dsd()
         for i in macierz:
-            print(macierz)
+            print(i)
 
 for i in macierz:
-    print(macierz)
+    print(i)
