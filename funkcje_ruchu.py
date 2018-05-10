@@ -55,17 +55,97 @@ def matrix_addition(matrix, direction):
                     matrix[int(fabs(row + c))][int(fabs(column + d))] = 0
 
 
+
+for i in range(0, 4):
+    macierz[i] = list(filter(lambda x: x > 0, macierz[i]))
+    while len(macierz[i]) < 4:
+        macierz[i].append(0)
+
+for i in range(0, 4):
+    macierz[i] = list(filter(lambda x: x > 0, macierz[i]))
+    while len(macierz[i]) < 4:
+        macierz[i].insert(0, 0)
+
+
+
+
+lista2 = []
+            j = 0
+            for k in range(0, 4):
+                for i in range(0, 4):
+                    lista2.append(macierz[i][k])
+                lista2 = list(filter(lambda x: x > 0, lista2))
+                while len(lista2) < 4:
+                    lista2.append(0)
+                for i in range(0, 4):
+                    macierz[i][k] = lista2[j]
+                    j += 1
+                j = 0
+                lista2 = []
+
+
+lista2 = []
+            j = 3
+            for k in range(0, 4):
+                for i in range(0, 4):
+                    lista2.append(macierz[3-i][k])
+                lista2 = list(filter(lambda x: x > 0, lista2))
+                while len(lista2) < 4:
+                    lista2.append(0)
+                for i in range(0, 4):
+                    macierz[i][k] = lista2[j]
+                    j -= 1
+                j = 3
+                lista2 = []
+
+
+
+
+
+def column_to_list(matrix, size):
+    work_list = []
+    for column in range(0, size):
+        for row in range(0, size):
+            work_list.append(matrix[row][column])
+    return work_list
+
+
+def list_reversion(list):
+    list = reversed(list)
+    return list
+
+
+
+def elements_movement(list, size, reversion):
+    if reversion is 'yes':
+        list_reversion(list)
+    list = list(filter(lambda x: x > 0, list))
+    while len(list) < size:
+        list.append(0)
+    if reversion is 'yes':
+        list_reversion(list)
+    return list
+
+
+
+
+
+
+
+def list_to_column(matrix, size, list):
+
+
+
+
+
 matrix = [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]]
 
 matrix_index_dictionaries_creation(4)
 
 print(matrix)
 
-matrix_addition(matrix, right)
-for i in range(0, 4):
-    matrix[i] = list(filter(lambda x: x > 0, matrix[i]))
-    while len(matrix[i]) < 4:
-        matrix[i].append(0)
+matrix_addition(matrix, left)
+
 
 print(matrix)
 

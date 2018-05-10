@@ -53,7 +53,7 @@ def columns_addition(matrix,size,course):
 
 def print_array():
     for i in range(0, len(array)):
-            print_line(0,1,1,i)
+            print_line(0,1,1,i
             print_line(1,2,0,i)
             print_line(2,3,0,i)
             print_line(3,4,0,i)
