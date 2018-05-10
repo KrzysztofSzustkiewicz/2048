@@ -56,20 +56,16 @@ def matrix_addition(matrix, direction):
 
 
 
-for i in range(0, 4):
-    macierz[i] = list(filter(lambda x: x > 0, macierz[i]))
-    while len(macierz[i]) < 4:
-        macierz[i].append(0)
 
-for i in range(0, 4):
-    macierz[i] = list(filter(lambda x: x > 0, macierz[i]))
-    while len(macierz[i]) < 4:
-        macierz[i].insert(0, 0)
+#for i in range(0, 4):
+ #   macierz[i] = list(filter(lambda x: x > 0, macierz[i]))
+  #  while len(macierz[i]) < 4:
+   #     macierz[i].insert(0, 0)
 
 
 
 
-lista2 = []
+def lista4():
             j = 0
             for k in range(0, 4):
                 for i in range(0, 4):
@@ -84,7 +80,7 @@ lista2 = []
                 lista2 = []
 
 
-lista2 = []
+def lista3():
             j = 3
             for k in range(0, 4):
                 for i in range(0, 4):
@@ -110,21 +106,35 @@ def column_to_list(matrix, size):
     return work_list
 
 
-def list_reversion(list):
-    list = reversed(list)
-    return list
+def list_reversion(list_arg):
+    list_arg = list(reversed(list_arg))
+    return list_arg
 
 
 
-def elements_movement(list, size, reversion):
-    if reversion is 'yes':
-        list_reversion(list)
-    list = list(filter(lambda x: x > 0, list))
-    while len(list) < size:
-        list.append(0)
-    if reversion is 'yes':
-        list_reversion(list)
-    return list
+def elements_movement(size, matrix, reversion=None):
+    for index in range(0, size):
+        if reversion is 'yes':
+            matrix[index] = list(reversed(matrix[index]))
+        matrix[index] = list(filter(lambda x: x > 0, matrix[index]))
+        while len(matrix[index]) < size:
+            matrix[index].append(0)
+        if reversion is 'yes':
+            matrix[index] = list(reversed(matrix[index]))
+
+
+
+
+
+
+    for row in matrix:
+        if reversion is 'yes':
+            row = list_reversion(row)
+        row = list(filter(lambda x: x > 0, row))
+        while len(row) < size:
+            row.append(0)
+        if reversion is 'yes':
+            row = list_reversion(row)
 
 
 
@@ -132,7 +142,7 @@ def elements_movement(list, size, reversion):
 
 
 
-def list_to_column(matrix, size, list):
+#def list_to_column(matrix, size, list):
 
 
 
@@ -145,6 +155,12 @@ matrix_index_dictionaries_creation(4)
 print(matrix)
 
 matrix_addition(matrix, left)
+
+
+
+elements_movement(4, matrix, 'yes')
+
+
 
 
 print(matrix)
