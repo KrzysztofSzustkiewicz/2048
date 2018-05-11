@@ -32,6 +32,7 @@ def elements_in_row_movement(size, matrix, reversion=None):
         if reversion is 'reversed':
             matrix[index] = list(reversed(matrix[index]))
 
+
 def elements_in_column_movement(size, matrix, reversion=None):
     for column in range(0, size):
         work_list = []
@@ -49,6 +50,8 @@ def elements_in_column_movement(size, matrix, reversion=None):
             matrix[row][column] = work_list[j]
             j += 1
 
+#Function puts_random places '2' or '4' in random place of matrix.
+#Argument 'times' determines how many random numbers are placed on each move.
 
 def puts_random_2(times):
     random_1 = random.randrange(0, 4)
@@ -60,12 +63,14 @@ def puts_random_2(times):
          else:
             puts_random_2(1)
 
+#Function search_for_zero looks through array for '0'.
 
 def search_for_zero():
     for row in array:
         if 0 in row:
             return 'lose'
 
+#Function search_win_con searches through array for win_con argument which is element that is required to win.
 
 def search_win_con(win_con):
     for row in array:
@@ -76,6 +81,8 @@ def search_win_con(win_con):
 def clear():
     os.system('clear')
 
+#Function colored takes 2 arguments.
+#Colored element and color key that takes information from color_key dictionary.
 
 def print_line(x, y, z, i):
     for j in range(x, y):
@@ -132,10 +139,14 @@ def matrix_index_dictionaries_creation(size):
 
 score_game = 0
 
+#Function is called in matrix_addition.
+
 def score_of_game(score_1):
     global score_game
     score_game += score_1
 
+#After each move matrix_addition checks if adjacent elements for the move direction have the same value.
+#If so, adds them.
 
 def matrix_addition(matrix, direction):
     a = direction['index_a']
@@ -153,6 +164,7 @@ def matrix_addition(matrix, direction):
                     int(fabs(column + b))]
                 score_of_game(matrix[int(fabs(row + a))][int(fabs(column + b))])
                 matrix[int(fabs(row + c))][int(fabs(column + d))] = 0
+
 
 
 size = 4
