@@ -90,9 +90,7 @@ def elements_in_row_movement(size, matrix, reversion=None):
 def condition_for_func_execution(matrix, condition_func, executed_func):
     pre_matrix = matrix
     condition_func
-    if pre_matrix == condition_func:
-        return
-    else:
+    if  not pre_matrix == condition_func:
         executed_func
 
 matrix = [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]]
